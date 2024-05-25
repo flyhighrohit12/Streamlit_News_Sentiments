@@ -3,8 +3,10 @@ import requests
 import pandas as pd
 import plotly.express as px
 import nltk
-nltk.download('vader_lexicon')
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
+
+# Ensure that the VADER lexicon is downloaded
+nltk.download('vader_lexicon')
 
 # Initialize sentiment analyzer
 sia = SentimentIntensityAnalyzer()
@@ -16,7 +18,7 @@ def fetch_news(query):
         'q': query,
         'language': 'en',
         'sortBy': 'relevance',
-        'apiKey': 'c5dca43be75c4d13bb938c2fd3058349'  # Replace with your actual News API key
+        'apiKey': 'YOUR_API_KEY'  # Replace with your actual News API key
     }
     response = requests.get(url, params=params)
     return response.json()
@@ -51,4 +53,3 @@ if st.button('Analyze Sentiments'):
         st.plotly_chart(fig)
     else:
         st.error("Failed to fetch news or no articles found.")
-
